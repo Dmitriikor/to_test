@@ -201,6 +201,7 @@ int main()
 		std::cout << std::endl;
 
 		thr_2.detach();
+
 		thr.join();
 
 	return 0;
