@@ -31,8 +31,7 @@ private:
 
 private:
 
-	template <class str_i_T>
-	struct  str_i {
+	struct str_i {
 		Matrix& my_matrix;
 		size_t i;
 
@@ -44,8 +43,8 @@ private:
 		}
 	};
 
-	template <class const_str_i_T>
-	struct  const_str_i {
+
+	struct const_str_i {
 		const Matrix& my_matrix;
 		size_t i;
 
@@ -66,13 +65,8 @@ public:
 
 	Matrix& operator=(const Matrix& other);
 
-	template <typename T>
-	Matrix<T>::str_i Matrix<T>::operator[](size_t i);
-	template <typename T>
-	Matrix<T>::str_i Matrix<T>::operator[](size_t i) const;
-
-	//str_i operator[](size_t i);
-	//const_str_i operator[](size_t i) const;
+	str_i operator[](size_t i);
+	const_str_i operator[](size_t i) const;
 
 	size_t get_N() const;
 
@@ -206,16 +200,14 @@ Matrix<T>& Matrix<T>::operator=(const Matrix& other)
 
 
 template <typename T>
-template <class str_i_T>
-Matrix<T>::str_i Matrix<T>::operator[](size_t i) {
+typename Matrix<T>::str_i Matrix<T>::operator[](size_t i) {
 	return str_i(*this, i);
 }
+
 template <typename T>
-template <class const_str_i_T>
-Matrix<T>::const_str_i Matrix<T>::operator[](size_t i) const {
+typename Matrix<T>::const_str_i Matrix<T>::operator[](size_t i) const {
 	return const_str_i(*this, i);
 }
-
 
 template <typename T>
 T** Matrix<T>::allocate(size_t N_, size_t M_)
